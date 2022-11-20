@@ -4,6 +4,12 @@ let me;
 let monster;
 const meSpeed = 3;
 
+// Main Character
+let characterDown = [];
+let characterUp = [];
+let characterLeft = [];
+let characterRight = [];
+
 let walls = [];
 const roadWidth = 100;
 let haveTicket = false;
@@ -64,7 +70,27 @@ let exit = false;
 function preload() {
   // load walls
   for (let i = 0; i <= 13; i++) {
-    walls[i] = loadImage("assets/wall" + i + ".png");
+    walls[i] = loadImage("assets/walls/wall" + i + ".png");
+  }
+
+  // load main character
+  for (let i = 0; i <= 3; i++) {
+    characterDown[i] = loadImage(
+      "assets/mainCharacter/down_0" + (i + 1) + ".png"
+    );
+  }
+  for (let i = 0; i <= 3; i++) {
+    characterLeft[i] = loadImage(
+      "assets/mainCharacter/left_0" + (i + 1) + ".png"
+    );
+  }
+  for (let i = 0; i <= 3; i++) {
+    characterRight[i] = loadImage(
+      "assets/mainCharacter/right_0" + (i + 1) + ".png"
+    );
+  }
+  for (let i = 0; i <= 3; i++) {
+    characterUp[i] = loadImage("assets/mainCharacter/up_0" + (i + 1) + ".png");
   }
 }
 
