@@ -3,17 +3,19 @@ function scene1() {
   const museum = { w: 400, h: 100 };
   const door = { w: 100, h: 40 };
 
-  background(0, 250, 0);
-  fill(0);
-  // wall: rect(width/2-museum.w/2, 0, museum.w, museum.h)
-  rect(
-    width / 2 - museum.w / 2 + me.r,
-    0,
-    museum.w - me.r * 2,
-    museum.h - me.r
-  );
-  fill(255);
-  rect(width / 2 - door.w / 2, museum.h - door.h, door.w, door.h - me.r);
+  // background(0, 250, 0);
+  imageMode(CORNER);
+  image(scenes[1], 0, 0);
+  // fill(0);
+  // // wall: rect(width/2-museum.w/2, 0, museum.w, museum.h)
+  // rect(
+  //   width / 2 - museum.w / 2 + me.r,
+  //   0,
+  //   museum.w - me.r * 2,
+  //   museum.h - me.r
+  // );
+  // fill(255);
+  // rect(width / 2 - door.w / 2, museum.h - door.h, door.w, door.h - me.r);
   me.display();
   me.checkMovement();
   checkTicket(museum, door);

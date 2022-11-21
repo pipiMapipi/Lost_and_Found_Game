@@ -1,7 +1,8 @@
 function scene0() {
-  background(230);
+  imageMode(CORNER);
+  image(scenes[0], 0, 0);
   fill(0);
-  textSize(15);
+  textSize(13);
   textStyle(BOLD);
   textAlign(CENTER);
   text("Press WASD to move", width / 2, 350);

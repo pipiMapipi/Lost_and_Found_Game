@@ -4,6 +4,9 @@ let me;
 let monster;
 const meSpeed = 3;
 
+let regularFont;
+let boldFont;
+
 // Main Character
 let characterDown = [];
 let characterUp = [];
@@ -11,6 +14,7 @@ let characterLeft = [];
 let characterRight = [];
 
 let walls = [];
+let scenes = [];
 const roadWidth = 100;
 let haveTicket = false;
 let haveLife = false;
@@ -73,6 +77,11 @@ function preload() {
     walls[i] = loadImage("assets/walls/wall" + i + ".png");
   }
 
+  // load maps
+  for (let i = 0; i <= 1; i++) {
+    scenes[i] = loadImage("assets/scenes/scene" + i + ".png");
+  }
+
   // load main character
   for (let i = 0; i <= 3; i++) {
     characterDown[i] = loadImage(
@@ -92,12 +101,18 @@ function preload() {
   for (let i = 0; i <= 3; i++) {
     characterUp[i] = loadImage("assets/mainCharacter/up_0" + (i + 1) + ".png");
   }
+
+  // load font
+  // https://www.dafont.com/dogica.font
+  regularFont = loadFont("assets/font/dogicapixel.otf");
+  boldFont = loadFont("assets/font/dogicapixelbold.otf");
 }
 
 function setup() {
   createCanvas(600, 400);
   me = new Me(width / 2, height / 2, 15);
   monster = new Monster(width / 2 + 10, 215 - 10, 15, me);
+  textFont(boldFont);
 
   // scene 5 hands
   hands[0] = new Hand(350, 250, 1);
