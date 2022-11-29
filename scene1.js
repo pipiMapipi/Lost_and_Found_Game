@@ -4,18 +4,9 @@ function scene1() {
   const door = { w: 100, h: 40 };
 
   // background(0, 250, 0);
+  textAlign(CENTER);
   imageMode(CORNER);
   image(scenes[1], 0, 0);
-  // fill(0);
-  // // wall: rect(width/2-museum.w/2, 0, museum.w, museum.h)
-  // rect(
-  //   width / 2 - museum.w / 2 + me.r,
-  //   0,
-  //   museum.w - me.r * 2,
-  //   museum.h - me.r
-  // );
-  // fill(255);
-  // rect(width / 2 - door.w / 2, museum.h - door.h, door.w, door.h - me.r);
   me.display();
   me.checkMovement();
   checkTicket(museum, door);
@@ -34,8 +25,10 @@ function checkTicket(museum, door) {
   );
   if (security) {
     if (!haveTicket) {
-      fill(150);
-      rect(width / 2 - door.w, museum.h - door.h - 25, door.w * 2, door.h);
+      imageMode(CORNER);
+      image(textFrame[0], width / 2 - door.w, museum.h - door.h - 25);
+      fill(0);
+      text("TICKET PLEASE", width / 2, museum.h - door.h);
       showFigure = true;
     } else {
       if (
@@ -56,27 +49,31 @@ function checkTicket(museum, door) {
 }
 
 function mysteriousFigure() {
-  fill(0);
-  rect(500, 300 + sin(millis() / 100) * 5, me.r * 2, me.r * 2);
+  mysteriousGuy.display();
+  mysteriousGuy.move();
 }
 
 function getTicket() {
   let approach = collideRectCircle(
-    500,
-    300,
+    475,
+    290,
     me.r * 2,
-    me.r * 2,
+    50,
     me.row,
     me.col,
     (me.r + meSpeed) * 2
   );
   if (approach) {
     if (!haveTicket) {
-      fill(150);
-      rect(475, 250, 80, 30);
+      fill(0);
+      imageMode(CENTER);
+      image(textFrame[0], 495, 260);
+      text("HERE'S A TICKET", 495, 265);
     } else {
       fill(0);
-      rect(475, 250, 80, 30);
+      imageMode(CENTER);
+      image(textFrame[0], 495, 260);
+      text("DON'T LOSE IT!", 495, 265);
     }
   }
   return approach;

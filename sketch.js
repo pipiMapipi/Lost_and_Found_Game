@@ -6,6 +6,7 @@ const meSpeed = 3;
 
 let regularFont;
 let boldFont;
+let textFrame = [];
 
 // Main Character
 let characterDown = [];
@@ -24,6 +25,10 @@ let life = { now: 10, total: 10 };
 
 // scene 1 default
 let showFigure = false;
+let mystery = [];
+let mysteriousGuy;
+let ticketImage;
+let itemImage;
 
 // scene 5 default
 let hands = [];
@@ -102,10 +107,24 @@ function preload() {
     characterUp[i] = loadImage("assets/mainCharacter/up_0" + (i + 1) + ".png");
   }
 
+  // load mysterious person
+  for (let i = 0; i <= 3; i++) {
+    mystery[i] = loadImage("assets/mystery/mystery_" + i + ".png");
+  }
+
+  // load ticket icon
+  ticketImage = loadImage("assets/icons/ticket.png");
+  itemImage = loadImage("assets/icons/item.png");
+
   // load font
   // https://www.dafont.com/dogica.font
   regularFont = loadFont("assets/font/dogicapixel.otf");
   boldFont = loadFont("assets/font/dogicapixelbold.otf");
+
+  // load text frames
+  for (let i = 0; i <= 0; i++) {
+    textFrame[i] = loadImage("assets/textFrame/frame_0" + (i + 1) + ".png");
+  }
 }
 
 function setup() {
@@ -113,6 +132,9 @@ function setup() {
   me = new Me(width / 2, height / 2, 15);
   monster = new Monster(width / 2 + 10, 215 - 10, 15, me);
   textFont(boldFont);
+
+  // scene 1 mysterious figure
+  mysteriousGuy = new Sprites(mystery, 495, 308);
 
   // scene 5 hands
   hands[0] = new Hand(350, 250, 1);

@@ -1,7 +1,8 @@
 function ticketIcon() {
   if (haveTicket) {
-    fill(255);
-    rect(20, 370, 30, 15);
+    imageMode(CENTER);
+    image(itemImage, 35, 365);
+    image(ticketImage, 35, 375);
   }
 }
 

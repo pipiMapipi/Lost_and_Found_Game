@@ -14,9 +14,6 @@ class Me {
   }
 
   display() {
-    // fill(255);
-    // ellipse(this.row, this.col, this.r * 2);
-
     // return int value
     let index = floor(this.frameOffset) % this.length;
     imageMode(CENTER);
