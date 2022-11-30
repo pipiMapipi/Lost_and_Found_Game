@@ -1,19 +1,15 @@
 /////////////// Scene 2 ///////////////
 function scene2() {
-  background(0, 0, 255);
-  fill(220);
-  rect(width / 2 - roadWidth / 2, height / 2, roadWidth, height / 2);
-  rect(width / 2 - roadWidth / 2, height / 2, width, roadWidth);
+  imageMode(CORNER);
+  image(scenes[2], 0, 0);
 
   // counter
-  fill(0);
-  rect(width / 2 - 100, height / 2 - 50, 200, 50);
-  rect(
-    width / 2 - me.r,
-    height / 2 - 85 + sin(millis() / 100) * 5,
-    me.r * 2,
-    me.r * 2
-  );
+  frontdeskGuy.display();
+  frontdeskGuy.move();
+
+  // computer
+  imageMode(CENTER);
+  image(computer, width / 2, height / 2 - 21);
 
   me.display();
   me.checkMovement();
@@ -35,11 +31,17 @@ function counterCheck() {
   );
   if (receptionist) {
     if (!haveLife) {
-      fill(220);
-      rect(width / 2 - 50, height / 2 - 130, 100, 30);
+      fill(0);
+      imageMode(CENTER);
+      textAlign(CENTER);
+      image(textFrame[0], width / 2, height / 2 - 90);
+      text("YOU'LL NEED THIS", width / 2, height / 2 - 85);
     } else {
-      fill(255, 0, 0);
-      rect(width / 2 - 50, height / 2 - 130, 100, 30);
+      fill(0);
+      imageMode(CENTER);
+      textAlign(CENTER);
+      image(textFrame[0], width / 2, height / 2 - 90);
+      text("ENJOY YOUR VISIT", width / 2, height / 2 - 85);
     }
   }
   return receptionist;

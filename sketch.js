@@ -22,6 +22,7 @@ let haveLife = false;
 let haveScarf = false;
 
 let life = { now: 10, total: 10 };
+let health = [];
 
 // scene 1 default
 let showFigure = false;
@@ -29,6 +30,11 @@ let mystery = [];
 let mysteriousGuy;
 let ticketImage;
 let itemImage;
+
+// scene 2 default
+let frontdesk = [];
+let frontdeskGuy;
+let computer;
 
 // scene 5 default
 let hands = [];
@@ -83,7 +89,7 @@ function preload() {
   }
 
   // load maps
-  for (let i = 0; i <= 1; i++) {
+  for (let i = 0; i <= 2; i++) {
     scenes[i] = loadImage("assets/scenes/scene" + i + ".png");
   }
 
@@ -116,6 +122,11 @@ function preload() {
   ticketImage = loadImage("assets/icons/ticket.png");
   itemImage = loadImage("assets/icons/item.png");
 
+  // load health progress
+  for (let i = 0; i <= 9; i++) {
+    health[i] = loadImage("assets/icons/health_0" + (9 - i) + ".png");
+  }
+
   // load font
   // https://www.dafont.com/dogica.font
   regularFont = loadFont("assets/font/dogicapixel.otf");
@@ -125,16 +136,28 @@ function preload() {
   for (let i = 0; i <= 0; i++) {
     textFrame[i] = loadImage("assets/textFrame/frame_0" + (i + 1) + ".png");
   }
+
+  // scene 2
+  // load frontdesk
+  for (let i = 0; i <= 3; i++) {
+    frontdesk[i] = loadImage("assets/frontdesk/frontdesk_" + i + ".png");
+  }
+  // load computer
+  computer = loadImage("assets/overlay/counterC.png");
 }
 
 function setup() {
+  noSmooth();
   createCanvas(600, 400);
   me = new Me(width / 2, height / 2, 15);
   monster = new Monster(width / 2 + 10, 215 - 10, 15, me);
   textFont(boldFont);
 
   // scene 1 mysterious figure
-  mysteriousGuy = new Sprites(mystery, 495, 308);
+  mysteriousGuy = new Sprites(mystery, 495, 308, 0.08);
+
+  // scene 2 front desk
+  frontdeskGuy = new Sprites(frontdesk, width / 2, height / 2 - 45, 0.04);
 
   // scene 5 hands
   hands[0] = new Hand(350, 250, 1);

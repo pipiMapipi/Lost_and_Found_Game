@@ -6,7 +6,7 @@ function scene0() {
   textStyle(BOLD);
   textAlign(CENTER);
   text("Press WASD to move", width / 2, 350);
-  text("Press ENTER to talk with NPCs", width / 2, 380);
+  text("Press ENTER to interact", width / 2, 380);
 
   triangle(
     width / 2,

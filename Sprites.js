@@ -1,7 +1,7 @@
 class Sprites {
-  constructor(animation, row, col) {
+  constructor(animation, row, col, speed) {
     this.animation = animation;
-    this.speed = 2;
+    this.speed = speed;
     this.frameOffset = 0;
     this.length = this.animation.length;
     this.row = row;
@@ -15,6 +15,6 @@ class Sprites {
   }
 
   move() {
-    this.frameOffset += 0.08;
+    this.frameOffset += this.speed;
   }
 }
