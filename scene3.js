@@ -1,10 +1,12 @@
 /////////////// Scene 3 ///////////////
 function scene3() {
-  background(0, 0, 255);
-  fill(220);
-  rect(0, height / 2, width, roadWidth);
+  imageMode(CORNER);
+  image(scenes[3], 0, 0);
+
   me.display();
   me.checkMovement();
+  imageMode(CORNER);
+  image(s3_overlay, 0, 0);
   ticketIcon();
   lifeIcon();
 

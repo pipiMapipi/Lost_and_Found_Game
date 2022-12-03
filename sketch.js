@@ -36,6 +36,9 @@ let frontdesk = [];
 let frontdeskGuy;
 let computer;
 
+// scene 3 default
+let s3_overlay;
+
 // scene 5 default
 let hands = [];
 
@@ -89,7 +92,7 @@ function preload() {
   }
 
   // load maps
-  for (let i = 0; i <= 2; i++) {
+  for (let i = 0; i <= 3; i++) {
     scenes[i] = loadImage("assets/scenes/scene" + i + ".png");
   }
 
@@ -144,12 +147,16 @@ function preload() {
   }
   // load computer
   computer = loadImage("assets/overlay/counterC.png");
+
+  // scene 3
+  // overlay
+  s3_overlay = loadImage("assets/overlay/s3_overlay.png");
 }
 
 function setup() {
   noSmooth();
   createCanvas(600, 400);
-  me = new Me(width / 2, height / 2, 15);
+  me = new Me(width / 2, height / 2 + 20, 15);
   monster = new Monster(width / 2 + 10, 215 - 10, 15, me);
   textFont(boldFont);
 
