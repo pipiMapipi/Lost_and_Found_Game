@@ -92,7 +92,7 @@ function preload() {
   }
 
   // load maps
-  for (let i = 0; i <= 3; i++) {
+  for (let i = 0; i <= 4; i++) {
     scenes[i] = loadImage("assets/scenes/scene" + i + ".png");
   }
 
@@ -256,12 +256,6 @@ function draw() {
     case 14:
       scene14();
       break;
-
-    //to go back to beginning
-    // case 10:
-    //   mode = 0;
-    //   break;
-
     case 15:
       scene15();
       break;

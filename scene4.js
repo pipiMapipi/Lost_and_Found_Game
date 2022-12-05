@@ -1,9 +1,8 @@
 /////////////// Scene 4 ///////////////
 function scene4() {
-  background(0, 0, 255);
-  fill(220);
-  rect(0, height / 2, width / 2 + roadWidth / 2, roadWidth);
-  rect(width / 2 - roadWidth / 2, 0, roadWidth, height / 2 + roadWidth);
+  imageMode(CORNER);
+  image(scenes[4], 0, 0);
+
   me.display();
   me.checkMovement();
   ticketIcon();
@@ -17,18 +16,27 @@ function scene4() {
     sceneChange();
     me.col = height - me.r;
   }
+
+  textAlign(CORNER);
+  textFont(regularFont);
+  if (me.col < 235) {
+    if (me.row >= 55 && me.row <= 145) {
+      fill(0, 100);
+      rect(33, 150, 135, 40, 3);
+      textSize(7);
+      fill(255);
+      text("I still have work to do...", 38, 165);
+      text("I cannot ...slee...p...zZZ", 38, 180);
+    }
+  }
 }
 
 function scarfDisplay() {
-  fill(150);
-  rect(width / 2 - 45, height / 2 + 5, 90, 90);
-  rect(width / 2 + 85, height / 2 + 5, 90, 90);
-
   let touchScarf = collideRectCircle(
-    width / 2 - 45,
-    height / 2 + 5,
-    90,
-    90,
+    width / 2 - 50,
+    height / 2 - 5,
+    100,
+    100,
     me.row,
     me.col,
     (me.r + meSpeed) * 2

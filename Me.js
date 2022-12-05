@@ -10,7 +10,7 @@ class Me {
     this.animation = characterDown;
     this.frameOffset = 0;
     this.length = this.animation.length;
-    this.speed = 0.2;
+    this.speed = 0.1;
   }
 
   display() {
@@ -21,34 +21,30 @@ class Me {
   }
 
   checkMovement() {
-    if (
-      (keyIsDown(LEFT_ARROW) || keyIsDown(65 /*a*/)) &&
-      !isWall(scene, this.row - meSpeed, this.col)
-    ) {
-      this.row -= meSpeed;
+    if (keyIsDown(LEFT_ARROW) || keyIsDown(65 /*a*/)) {
+      if (!isWall(scene, this.row - meSpeed, this.col)) {
+        this.row -= meSpeed;
+        this.frameOffset += this.speed;
+      }
       this.animation = this.left;
-      this.frameOffset += this.speed;
-    } else if (
-      (keyIsDown(RIGHT_ARROW) || keyIsDown(68 /*d*/)) &&
-      !isWall(scene, this.row + meSpeed, this.col)
-    ) {
-      this.row += meSpeed;
+    } else if (keyIsDown(RIGHT_ARROW) || keyIsDown(68 /*d*/)) {
+      if (!isWall(scene, this.row + meSpeed, this.col)) {
+        this.row += meSpeed;
+        this.frameOffset += this.speed;
+      }
       this.animation = this.right;
-      this.frameOffset += this.speed;
-    } else if (
-      (keyIsDown(UP_ARROW) || keyIsDown(87 /*w*/)) &&
-      !isWall(scene, this.row, this.col - meSpeed)
-    ) {
-      this.col -= meSpeed;
+    } else if (keyIsDown(UP_ARROW) || keyIsDown(87 /*w*/)) {
+      if (!isWall(scene, this.row, this.col - meSpeed)) {
+        this.col -= meSpeed;
+        this.frameOffset += this.speed;
+      }
       this.animation = this.up;
-      this.frameOffset += this.speed;
-    } else if (
-      (keyIsDown(DOWN_ARROW) || keyIsDown(83 /*s*/)) &&
-      !isWall(scene, this.row, this.col + meSpeed)
-    ) {
-      this.col += meSpeed;
+    } else if (keyIsDown(DOWN_ARROW) || keyIsDown(83 /*s*/)) {
+      if (!isWall(scene, this.row, this.col + meSpeed)) {
+        this.col += meSpeed;
+        this.frameOffset += this.speed;
+      }
       this.animation = this.down;
-      this.frameOffset += this.speed;
     }
   }
 }
