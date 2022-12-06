@@ -1,22 +1,27 @@
 class Hand {
-  constructor(x, y, side) {
-    this.x = x;
-    this.y = y;
+  constructor(animation, row, col, speed, side) {
+    this.animation = animation;
+    this.speed = speed;
+    this.frameOffset = 0;
+    this.length = this.animation.length;
+    this.row = row;
+    this.col = col;
     this.side = side;
-    this.startX = x;
-    this.startY = y;
+    this.startX = row;
+    this.startY = col;
     this.offset = 0;
     this.time = 0;
   }
 
   display() {
-    fill(0, 0, 255);
-    rect(
-      this.x,
-      this.y + sin(millis() / 100 + this.offset / this.side) * 5,
-      70,
-      20
-    );
+    let index = floor(this.frameOffset) % this.length;
+    imageMode(CORNER);
+    if (this.side == -1) {
+      scale(-1, 1);
+      image(this.animation[index], -this.row, this.col);
+    } else {
+      image(this.animation[index], this.row, this.col);
+    }
   }
 
   wallText() {
@@ -24,13 +29,22 @@ class Hand {
     textSize(25);
     fill(255, 0, 0);
     if (this.side == -1) {
-      text("WHERE?", this.x - 100, this.y + 50);
+      text(
+        "WHERE?",
+        this.row - 210 + random(-3, 3),
+        this.col + 70 + random(-2, 2)
+      );
     } else {
-      text("WHERE!!", this.x + 170, this.y + 50);
+      text(
+        "WHERE!!",
+        this.row + 210 + random(-3, 3),
+        this.col + 70 + random(-2, 2)
+      );
     }
   }
 
   move(direction) {
+    this.frameOffset += this.speed;
     // hands out
     if (direction == 1) {
       if (this.offset < 1) {
@@ -49,10 +63,10 @@ class Hand {
 
     if (this.side == -1) {
       // left hands
-      this.x = lerp(this.startX, this.startX + 55, this.offset);
+      this.row = lerp(this.startX, this.startX + 75, this.offset);
     } else {
       // right hands
-      this.x = lerp(this.startX, this.startX - 55, this.offset);
+      this.row = lerp(this.startX, this.startX - 75, this.offset);
     }
   }
 
@@ -60,12 +74,12 @@ class Hand {
     if (
       (this.side == 1 &&
         me.row + me.r >= this.startX - 55 &&
-        me.col + me.r > this.y - 35 &&
-        me.col - me.r < this.y + 35) ||
+        me.col + me.r > this.col &&
+        me.col - me.r < this.col + 35) ||
       (this.side == -1 &&
         me.row - me.r <= this.startX + 125 &&
-        me.col + me.r > this.y - 35 &&
-        me.col - me.r < this.y + 35)
+        me.col + me.r > this.col &&
+        me.col - me.r < this.col + 35)
     ) {
       this.time += 0.04;
       if (this.time <= 0.04) {

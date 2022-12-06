@@ -48,6 +48,8 @@ let s4_overlay;
 
 // scene 5 default
 let hands = [];
+let handsSprite = [];
+let s5_overlay;
 
 // scene 6 default
 let eye1;
@@ -99,7 +101,7 @@ function preload() {
   }
 
   // load maps
-  for (let i = 0; i <= 4; i++) {
+  for (let i = 0; i <= 5; i++) {
     scenes[i] = loadImage("assets/scenes/scene" + i + ".png");
   }
 
@@ -165,6 +167,14 @@ function preload() {
   // scene 4
   // overlay
   s4_overlay = loadImage("assets/overlay/s4_overlay.png");
+
+  // scene 5
+  // hands
+  for (let i = 0; i <= 7; i++) {
+    handsSprite[i] = loadImage("assets/hands/hands_" + i + ".png");
+  }
+  // overlay
+  s5_overlay = loadImage("assets/overlay/s5_overlay.png");
 }
 
 function setup() {
@@ -181,9 +191,9 @@ function setup() {
   frontdeskGuy = new Sprites(frontdesk, width / 2, height / 2 - 45, 0.04);
 
   // scene 5 hands
-  hands[0] = new Hand(350, 250, 1);
-  hands[1] = new Hand(180, 150, -1);
-  hands[2] = new Hand(350, 50, 1);
+  hands[0] = new Hand(handsSprite, 370, 250, 0.13, 1);
+  hands[1] = new Hand(handsSprite, 230, 150, 0.12, -1);
+  hands[2] = new Hand(handsSprite, 370, 50, 0.15, 1);
 
   // scene 6 eyes
   eye1 = new Eye(130, 90);

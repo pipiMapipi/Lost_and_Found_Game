@@ -18,7 +18,7 @@ function scene3() {
 
   // text
 
-  textAlign(CORNER);
+  textAlign(LEFT);
   textFont(regularFont);
   if (me.col < 235) {
     if (me.row >= 55 && me.row <= 145) {

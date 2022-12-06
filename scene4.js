@@ -9,11 +9,7 @@ function scene4() {
 
   me.display();
   me.checkMovement();
-  ticketIcon();
-  lifeIcon();
-
   scarfDisplay();
-  scarfIcon();
 
   if (me.col - me.r < 0) {
     nextScene = true;
@@ -100,4 +96,7 @@ function scarfDisplay() {
       image(s4_overlay, 0, 0);
     }
   }
+
+  ticketIcon();
+  lifeIcon();
 }
