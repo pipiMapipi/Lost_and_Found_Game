@@ -39,6 +39,13 @@ let computer;
 // scene 3 default
 let s3_overlay;
 
+// scene 4 default
+let lightOffset = 0;
+let reality;
+let changeTrigger = false;
+let realityTime = 280;
+let s4_overlay;
+
 // scene 5 default
 let hands = [];
 
@@ -96,6 +103,9 @@ function preload() {
     scenes[i] = loadImage("assets/scenes/scene" + i + ".png");
   }
 
+  // load scene 4 V2
+  reality = loadImage("assets/scenes/scene4_2.png");
+
   // load main character
   for (let i = 0; i <= 3; i++) {
     characterDown[i] = loadImage(
@@ -151,6 +161,10 @@ function preload() {
   // scene 3
   // overlay
   s3_overlay = loadImage("assets/overlay/s3_overlay.png");
+
+  // scene 4
+  // overlay
+  s4_overlay = loadImage("assets/overlay/s4_overlay.png");
 }
 
 function setup() {
@@ -282,10 +296,6 @@ function keyPressed() {
   } else if (scene == 2 && counterCheck()) {
     if (keyCode === 13) {
       haveLife = true;
-    }
-  } else if (scene == 4 && scarfDisplay()) {
-    if (keyCode === 13) {
-      haveScarf = true;
     }
   } else if (scene == 7 && extraLifeCheck()) {
     if (keyCode === 13) {
