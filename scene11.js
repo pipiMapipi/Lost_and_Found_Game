@@ -38,15 +38,17 @@ function scene11() {
   // hands
   for (let i = 0; i < hands11.length; i++) {
     if (
-      me.col >= hands11[i].y - 30 &&
-      dist(me.row, me.col, hands11[i].x + 35, hands11[i].y) <
+      me.col >= hands11[i].col - 30 &&
+      dist(me.row, me.col, hands11[i].row + 35, hands11[i].col) <
         100 - hands11[i].side * 7
     ) {
       hands11[i].move(1);
       hands11[i].catchDetection();
     }
 
+    push();
     hands11[i].display();
+    pop();
   }
 
   // drop ticket

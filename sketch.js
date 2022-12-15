@@ -101,7 +101,7 @@ function preload() {
   }
 
   // load maps
-  for (let i = 0; i <= 5; i++) {
+  for (let i = 0; i <= 6; i++) {
     scenes[i] = loadImage("assets/scenes/scene" + i + ".png");
   }
 
@@ -210,7 +210,6 @@ function setup() {
   s7Flowers[3] = new Flower(width / 2, height / 2 + 150);
   s7Flowers[4] = new Flower(445, 165);
   s7Flowers[5] = new Flower(445, 265);
-  console.log(s7Flowers[0].x);
   for (let i = 0; i < s7Flowers.length; i++) {
     flowerAttack[i] = new FlowerBullet(s7Flowers[i]);
   }
@@ -225,8 +224,8 @@ function setup() {
   }
 
   // scene 11 hands
-  hands11[0] = new Hand(550, 185, 1);
-  hands11[1] = new Hand(180, 320, -1);
+  hands11[0] = new Hand(handsSprite, 550, 185, 0.13, 1);
+  hands11[1] = new Hand(handsSprite, 250, 320, 0.12, -1);
   // scene 11 mouths
   mouths11[0] = new Mouth(width / 2 - 150, height / 2 - 40);
   mouths11[1] = new Mouth(width / 2 + 40, height / 2 - 10);

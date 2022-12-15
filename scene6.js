@@ -1,11 +1,7 @@
 /////////////// Scene 6 ///////////////
 function scene6() {
-  background(0, 0, 255);
-  fill(220);
-  rect(width / 2 - roadWidth / 2, 280, roadWidth, height / 2);
-  rect(50, 280, width / 2, roadWidth);
-  rect(50, 165, roadWidth, roadWidth * 2 + 15);
-  rect(50, 165, width, roadWidth);
+  imageMode(CORNER);
+  image(scenes[6], 0, 0);
   // painting
   fill(100);
   rect(30, 40, 200, 100);

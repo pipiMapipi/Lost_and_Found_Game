@@ -22,6 +22,7 @@ class Hand {
     } else {
       image(this.animation[index], this.row, this.col);
     }
+    this.frameOffset += this.speed;
   }
 
   wallText() {
@@ -44,7 +45,6 @@ class Hand {
   }
 
   move(direction) {
-    this.frameOffset += this.speed;
     // hands out
     if (direction == 1) {
       if (this.offset < 1) {
@@ -73,11 +73,11 @@ class Hand {
   catchDetection() {
     if (
       (this.side == 1 &&
-        me.row + me.r >= this.startX - 55 &&
+        me.row + me.r >= this.startX - 75 &&
         me.col + me.r > this.col &&
         me.col - me.r < this.col + 35) ||
       (this.side == -1 &&
-        me.row - me.r <= this.startX + 125 &&
+        me.row - me.r <= this.startX + 75 &&
         me.col + me.r > this.col &&
         me.col - me.r < this.col + 35)
     ) {
