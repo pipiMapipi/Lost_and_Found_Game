@@ -1,4 +1,4 @@
-let scene = 1;
+let scene = 0;
 let nextScene = false;
 let me;
 let monster;
