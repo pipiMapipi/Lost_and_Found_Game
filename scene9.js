@@ -1,22 +1,27 @@
 /////////////// Scene 9 (8.2) ///////////////
 function scene9() {
-  background(0, 0, 255);
-  fill(220);
-  rect(0, 165, width / 2, roadWidth);
-  rect(width / 2 - 50, 165, roadWidth, height);
-  me.display();
-  me.checkMovement();
+  imageMode(CORNER);
+  image(scenes[9], 0, 0);
+
   ticketIcon();
   lifeIcon();
   scarfIcon();
 
   attackCountdown++;
 
+  monster.display();
+  monster.move();
+
   if (life.now != 0 && attackCountdown >= 30) {
-    monster.display();
     monster.checkMovement();
     monster.kill();
   }
+
+  me.display();
+  me.checkMovement();
+
+  fill(0, 80 + random(-10, 20));
+  rect(0, 0, width, height);
 
   if (me.col > height) {
     nextScene = true;

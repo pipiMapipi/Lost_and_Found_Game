@@ -1,14 +1,7 @@
 /////////////// Scene 8 ///////////////
 function scene8() {
-  background(0, 0, 255);
-  fill(220);
-  rect(0, 165, width / 2, roadWidth);
-  rect(width / 2 - 50, 165, roadWidth, height);
-
-  // Monster Talking
-  fill(255, 0, 0);
-  ellipse(width / 2 + 10, 215 - 10, 30);
-  rect(width / 2 - 30, 215, 25, 25);
+  imageMode(CORNER);
+  image(scenes[8], 0, 0);
 
   // Text
   if (me.row > width / 2 - roadWidth / 1.3) {
@@ -16,6 +9,9 @@ function scene8() {
   }
 
   if (!monsterAttack) {
+    // Monster Talking
+    monsterChoice.move();
+    monsterChoice.display();
     if (!approachMonster) {
       if (textOffset == 50) {
         if (textNum == 1) {
@@ -27,33 +23,40 @@ function scene8() {
       } else {
         textOffset += 1;
       }
-      textSize(25);
+      textSize(20);
       textAlign(CENTER);
+      fill(255);
       if (textNum == 1) {
-        text("IT'S HERE...", width / 2 + roadWidth, 120);
+        text("IT'S HERE...", width / 2 + roadWidth, 170);
       } else {
-        text("IT'S NOT HERE", width / 2 + roadWidth * 1.6, 200);
+        text("IT'S NOT HERE", width / 2 + roadWidth * 1.6, 235);
       }
     } else {
-      textSize(30);
+      textSize(20);
+      fill(255);
       textAlign(CENTER);
       text("IS IT HERE???", width / 2 + roadWidth * 1.7, 230);
       textAlign(LEFT);
       if (me.col <= height / 2) {
-        textSize(30);
-        text("YES", width / 2 - roadWidth * 1.5, height / 2 + 5);
-        textSize(25);
-        text("NO", width / 2 - roadWidth * 1.5, height / 2 + 50);
+        textSize(20);
+        text("YES", width / 2 - roadWidth * 1.3, height / 2);
+        textSize(15);
+        text("NO", width / 2 - roadWidth * 1.3, height / 2 + 45);
       } else {
-        textSize(25);
-        text("YES", width / 2 - roadWidth * 1.5, height / 2 + 5);
-        textSize(30);
-        text("NO", width / 2 - roadWidth * 1.5, height / 2 + 50);
+        textSize(15);
+        text("YES", width / 2 - roadWidth * 1.3, height / 2);
+        textSize(20);
+        text("NO", width / 2 - roadWidth * 1.3, height / 2 + 50);
       }
     }
   } else {
-    textSize(35);
+    imageMode(CORNER);
+    image(s8_overlay, 0, 0);
+    attack.move();
+    attack.display();
+    textSize(30);
     textAlign(CENTER);
+    fill(255, 0, 0);
     text("YOU LIED!!!", width / 2 + random(-5, 5), 150 + random(-10, 10));
     attackCountdown++;
   }
@@ -62,7 +65,9 @@ function scene8() {
   me.checkMovement();
   ticketIcon();
   lifeIcon();
-  scarfIcon();
+
+  fill(0, 80 + random(-10, 20));
+  rect(0, 0, width, height);
 
   if (attackCountdown == 100) {
     nextScene = true;

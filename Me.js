@@ -10,7 +10,7 @@ class Me {
     this.animation = characterDown;
     this.frameOffset = 0;
     this.length = this.animation.length;
-    this.speed = 0.1;
+    this.speed = 0.14;
   }
 
   display() {

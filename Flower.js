@@ -1,16 +1,26 @@
 class Flower {
-  constructor(_x, _y) {
-    this.x = _x;
-    this.y = _y;
-    this.r = 50;
+  constructor(animation1, animation2, row, col, speed) {
+    this.animation1 = animation1;
+    this.animation2 = animation2;
+    this.speed = speed;
+    this.frameOffset = 0;
+    this.length = this.animation1.length;
+    this.row = row;
+    this.col = col;
   }
 
   display() {
+    let index = floor(this.frameOffset) % this.length;
+    imageMode(CENTER);
+
     if (!evilFlower) {
-      fill(255);
+      image(this.animation1[index], this.row, this.col);
     } else {
-      fill(255, 0, 0);
+      image(this.animation2[index], this.row, this.col);
     }
-    ellipse(this.x, this.y, this.r);
+  }
+
+  move() {
+    this.frameOffset += this.speed;
   }
 }

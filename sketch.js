@@ -1,4 +1,4 @@
-let scene = 0;
+let scene = 1;
 let nextScene = false;
 let me;
 let monster;
@@ -52,21 +52,28 @@ let handsSprite = [];
 let s5_overlay;
 
 // scene 6 default
+let s6_overlay;
 let eye1;
 let eye2;
 let mouths = [];
 let scene6Text = ["HOW", "DARE", "YOU", "LOSE", "IT"];
+let eyesSprite = [];
+let mouthsSprite = [];
 
 // scene 7 default
+let s7_overlay;
 let extraLife = false;
 let evilFlower = false;
+let flowersSprite1 = [];
+let flowersSprite2 = [];
 let s7Flowers = [];
 let flowerAttack = [];
+let bulletsSprite = [];
 let scene7Text = [
   "CARELESS!",
   "NO WAY!",
-  "BORROW?",
   "IRRESPONSIBLE!",
+  "JUST KIDDING!",
   "YOU?",
   "IMPOSSIBLE!",
 ];
@@ -77,6 +84,15 @@ let monsterAttack = false;
 let textOffset = 10;
 let textNum = 1;
 let attackCountdown = 0;
+let choiceSprite = [];
+let monsterChoice;
+let attackSprite = [];
+let attack;
+let s8_overlay;
+
+// scene 9 default
+let monsterChase;
+let monsterSprite = [];
 
 // scene 10 default
 let s10Flowers = [];
@@ -101,7 +117,7 @@ function preload() {
   }
 
   // load maps
-  for (let i = 0; i <= 6; i++) {
+  for (let i = 0; i <= 10; i++) {
     scenes[i] = loadImage("assets/scenes/scene" + i + ".png");
   }
 
@@ -148,7 +164,7 @@ function preload() {
   boldFont = loadFont("assets/font/dogicapixelbold.otf");
 
   // load text frames
-  for (let i = 0; i <= 0; i++) {
+  for (let i = 0; i <= 1; i++) {
     textFrame[i] = loadImage("assets/textFrame/frame_0" + (i + 1) + ".png");
   }
 
@@ -175,13 +191,57 @@ function preload() {
   }
   // overlay
   s5_overlay = loadImage("assets/overlay/s5_overlay.png");
+
+  // scene 6
+  // eyes
+  for (let i = 0; i <= 41; i++) {
+    eyesSprite[i] = loadImage("assets/eyes/eye_" + i + ".png");
+  }
+  // mouths
+  for (let i = 0; i <= 6; i++) {
+    mouthsSprite[i] = loadImage("assets/mouths/mouths_" + i + ".png");
+  }
+  // overlay
+  s6_overlay = loadImage("assets/overlay/s6_overlay.png");
+
+  // scene 7
+  // flowers
+  for (let i = 0; i <= 7; i++) {
+    flowersSprite1[i] = loadImage("assets/flowers1/flower_" + i + ".png");
+  }
+  for (let i = 0; i <= 7; i++) {
+    flowersSprite2[i] = loadImage("assets/flowers2/flower_" + i + ".png");
+  }
+  for (let i = 0; i <= 6; i++) {
+    bulletsSprite[i] = loadImage("assets/bullets/bullet_" + i + ".png");
+  }
+  // overlay
+  s7_overlay = loadImage("assets/overlay/s7_overlay.png");
+
+  //scene8
+  // choice
+  for (let i = 0; i <= 9; i++) {
+    choiceSprite[i] = loadImage("assets/choice/choice_0" + i + ".png");
+  }
+  // attack
+  for (let i = 0; i <= 22; i++) {
+    attackSprite[i] = loadImage("assets/attack/angry_" + i + ".png");
+  }
+  // overlay
+  s8_overlay = loadImage("assets/overlay/s8_overlay.png");
+
+  //scene9
+  // monster
+  for (let i = 0; i <= 3; i++) {
+    monsterSprite[i] = loadImage("assets/monster/monster_" + i + ".png");
+  }
 }
 
 function setup() {
   noSmooth();
   createCanvas(600, 400);
   me = new Me(width / 2, height / 2 + 20, 15);
-  monster = new Monster(width / 2 + 10, 215 - 10, 15, me);
+
   textFont(boldFont);
 
   // scene 1 mysterious figure
@@ -196,31 +256,50 @@ function setup() {
   hands[2] = new Hand(handsSprite, 370, 50, 0.15, 1);
 
   // scene 6 eyes
-  eye1 = new Eye(130, 90);
-  eye2 = new Eye(500, 330);
+  eye1 = new Sprites(eyesSprite, 140, 58.35, 0.17);
+  eye2 = new Sprites(eyesSprite, 490, 355, 0.13);
 
   // scene 6 mouths
-  mouths[0] = new Mouth(260, 235);
-  mouths[1] = new Mouth(450, 210);
+  mouths[0] = new Sprites(mouthsSprite, 260, 235, 0.3);
+  mouths[1] = new Sprites(mouthsSprite, 450, 210, 0.34);
 
   // scene 7 flowers
-  s7Flowers[0] = new Flower(155, 165);
-  s7Flowers[1] = new Flower(155, 265);
-  s7Flowers[2] = new Flower(width / 2, height / 2 - 150);
-  s7Flowers[3] = new Flower(width / 2, height / 2 + 150);
-  s7Flowers[4] = new Flower(445, 165);
-  s7Flowers[5] = new Flower(445, 265);
+  s7Flowers[0] = new Flower(flowersSprite1, flowersSprite2, 155, 165, 0.13);
+  s7Flowers[1] = new Flower(flowersSprite1, flowersSprite2, 155, 265, 0.15);
+  s7Flowers[2] = new Flower(
+    flowersSprite1,
+    flowersSprite2,
+    width / 2,
+    height / 2 - 150,
+    0.14
+  );
+  s7Flowers[3] = new Flower(
+    flowersSprite1,
+    flowersSprite2,
+    width / 2,
+    height / 2 + 150,
+    0.14
+  );
+  s7Flowers[4] = new Flower(flowersSprite1, flowersSprite2, 445, 165, 0.15);
+  s7Flowers[5] = new Flower(flowersSprite1, flowersSprite2, 445, 265, 0.13);
   for (let i = 0; i < s7Flowers.length; i++) {
-    flowerAttack[i] = new FlowerBullet(s7Flowers[i]);
+    flowerAttack[i] = new FlowerBullet(s7Flowers[i], bulletsSprite);
   }
 
+  // scene 8 choice
+  monsterChoice = new Sprites(choiceSprite, width / 2 + 10, 205, 0.22);
+  attack = new Sprites(attackSprite, width / 2 + 15, 210, 0.22);
+
+  // scene 9 monster
+  monster = new Monster(monsterSprite, width / 2 + 15, 210, me);
+
   // scene 10 flowers
-  s10Flowers[0] = new Flower(350, 250);
-  s10Flowers[1] = new Flower(250, 150);
-  s10Flowers[2] = new Flower(350, 50);
-  s10Flowers[3] = new Flower(250, 300);
+  s10Flowers[0] = new Flower(flowersSprite1, flowersSprite2, 350, 250, 0.15);
+  s10Flowers[1] = new Flower(flowersSprite1, flowersSprite2, 250, 150, 0.15);
+  s10Flowers[2] = new Flower(flowersSprite1, flowersSprite2, 350, 50, 0.15);
+  s10Flowers[3] = new Flower(flowersSprite1, flowersSprite2, 250, 300, 0.15);
   for (let i = 0; i < s10Flowers.length; i++) {
-    flowerAttack10[i] = new FlowerBullet(s10Flowers[i]);
+    flowerAttack10[i] = new FlowerBullet(s10Flowers[i], bulletsSprite);
   }
 
   // scene 11 hands

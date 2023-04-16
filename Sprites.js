@@ -6,6 +6,7 @@ class Sprites {
     this.length = this.animation.length;
     this.row = row;
     this.col = col;
+    this.r = 20;
   }
 
   display() {
@@ -16,5 +17,18 @@ class Sprites {
 
   move() {
     this.frameOffset += this.speed;
+  }
+
+  mouthCatchDetection() {
+    let distMeMouth = dist(me.row, me.col, this.row, this.col);
+    if (distMeMouth <= me.r + this.r) {
+      this.time += 0.04;
+      if (this.time <= 0.04) {
+        life.now--;
+      }
+      if (this.time >= 2) {
+        this.time = 0;
+      }
+    }
   }
 }

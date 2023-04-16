@@ -1,16 +1,25 @@
 class Monster {
-  constructor(_row, _col, _r, _me) {
+  constructor(animation, _row, _col, _me) {
     this.row = _row;
     this.col = _col;
-    this.r = _r;
+    this.r = 30;
     this.me = _me;
     this.speed = 50;
     this.jump = 3;
+    this.animation = animation;
+    this.animeSpeed = 0.15;
+    this.frameOffset = 0;
+    this.length = this.animation.length;
   }
 
   display() {
-    fill(255, 0, 0);
-    ellipse(this.row, this.col, this.r * 2);
+    let index = floor(this.frameOffset) % this.length;
+    imageMode(CENTER);
+    image(this.animation[index], this.row, this.col);
+  }
+
+  move() {
+    this.frameOffset += this.animeSpeed;
   }
 
   checkMovement() {

@@ -1,42 +1,59 @@
 /////////////// Scene 7 ///////////////
 function scene7() {
-  background(0, 0, 255);
-  fill(220);
-  rect(0, 165, width, roadWidth);
-  ellipse(width / 2, height / 2, 300);
-  me.display();
-  me.checkMovement();
+  imageMode(CORNER);
+  image(scenes[7], 0, 0);
+
   ticketIcon();
   lifeIcon();
   scarfIcon();
 
   // Recover?
-  if (!extraLife) {
-    fill(255);
-    rect(width / 2 - 60, height / 2 - 60, 120, 120);
-  } else {
-    fill(255, 0, 0);
-    rect(width / 2 - 60, height / 2 - 60, 120, 120);
+  if (extraLife) {
+    imageMode(CORNER);
+    image(s7_overlay, 0, 0);
+  }
+
+  for (let i = 0; i < s7Flowers.length; i++) {
+    if (i % 2 == 0) {
+      s7Flowers[i].display();
+    }
+  }
+  me.display();
+  me.checkMovement();
+
+  for (let i = 0; i < s7Flowers.length; i++) {
+    if (i % 2 == 1) {
+      s7Flowers[i].display();
+    }
+    s7Flowers[i].move();
+    if (evilFlower) {
+      flowerAttack[i].hitDetection();
+      flowerAttack[i].move();
+      flowerAttack[i].animate();
+      flowerAttack[i].display();
+      push();
+      textSize(13);
+      fill(255);
+      textAlign(CENTER);
+      text(
+        scene7Text[i],
+        s7Flowers[i].row +
+          (s7Flowers[i].row - width / 2) / 2 +
+          random(-1.5, 1.5),
+        s7Flowers[i].col +
+          (s7Flowers[i].col - height / 2) / 4.2 +
+          5 +
+          random(-1, 1)
+      );
+      pop();
+    }
   }
 
   extraLifeCheck();
 
-  for (let i = 0; i < s7Flowers.length; i++) {
-    s7Flowers[i].display();
-    if (evilFlower) {
-      flowerAttack[i].hitDetection();
-      flowerAttack[i].move();
-      flowerAttack[i].display();
-      push();
-      textSize(15);
-      textAlign(CENTER);
-      text(
-        scene7Text[i],
-        s7Flowers[i].x + (s7Flowers[i].x - width / 2) / 2,
-        s7Flowers[i].y + (s7Flowers[i].y - height / 2) / 3.5
-      );
-      pop();
-    }
+  if (evilFlower) {
+    fill(0, 80 + random(-10, 20));
+    rect(0, 0, width, height);
   }
 
   if (me.row + me.r > width && evilFlower) {
@@ -57,9 +74,13 @@ function extraLifeCheck() {
     (me.r + meSpeed) * 2
   );
   if (Credence) {
-    if (!extraLife) {
-      fill(255);
-      rect(width / 2 - 50, height / 2 + 70, 100, 30);
+    if (!extraLife && me.row > height / 2 + 40) {
+      imageMode(CENTER);
+      image(textFrame[1], width / 2, height / 2 + 50);
+      textSize(13);
+      fill(0);
+      textAlign(CENTER);
+      text("CHECKPOINT", width / 2, height / 2 + 56);
     }
   }
   return Credence;
